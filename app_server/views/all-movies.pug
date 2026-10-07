@@ -1,0 +1,100 @@
+extends layout
+
+block content
+    .container.py-4
+        .card.bg-dark.text-white.p-3.mb-5.border-0(style="background-color: #121620 !important; border-radius: 12px; border: 1px solid #1e2433 !important;")
+            .row.g-3.align-items-center
+                .col-12.col-md-4
+                    .input-group
+                        span.input-group-text.bg-transparent.border-0.text-secondary
+                            i.fa.fa-search
+                        input.form-control.custom-input.border-0(type="search", placeholder="Search movies...", style="background-color: #1a202c !important;")
+                .col-6.col-md-3
+                    select.form-select.custom-input.border-0(style="background-color: #1a202c !important; color: #a0aec0;")
+                        option(selected) All Genres
+                        option(value="Action") Action
+                        option(value="Sci-Fi") Sci-Fi
+                        option(value="Drama") Drama
+                        option(value="Thriller") Thriller
+                .col-6.col-md-3
+                    select.form-select.custom-input.border-0(style="background-color: #1a202c !important; color: #a0aec0;")
+                        option(selected) Sort: Popularity
+                        option(value="rating") Sort: Rating
+                        option(value="year") Sort: Release Year
+                .col-12.col-md-2.text-md-end
+                    button.btn.custom-btn-yellow.w-100.fw-bold(type="button", data-bs-toggle="modal", data-bs-target="#addMovieModal") + Add New Movie
+
+        h3.fw-bold.mb-4(style="color: #ffffff;") Trending Catalog
+
+        .row.g-4
+            each movie in movies
+                .col-12.col-sm-6.col-md-4.col-lg-3
+                    .card.h-100.border-0(style="background-color: #121620 !important; border: 1px solid #1e2433 !important; border-radius: 12px; overflow: hidden;")
+                        img.card-img-top(src=movie.logoUrl, alt=movie.title, style="height: 360px; object-fit: cover;")
+
+                        .card-body.d-flex.flex-column.p-3
+                            .d-flex.justify-content-between.align-items-start.mb-1
+                                h6.fw-bold.text-white.mb-0= movie.title
+                                small.text-secondary= movie.releaseYear
+
+                            p.mb-2(style="color: #718096; font-size: 0.8rem;") Dir: #{movie.director}
+
+                            .mb-3
+                                if movie.genre
+                                    each g in (Array.isArray(movie.genre) ? movie.genre : movie.genre.split(','))
+                                        span.badge.me-1(style="background-color: #1a202c; color: #a0aec0; border: 1px solid #2d3748; font-weight: normal; font-size: 0.7rem;")= g.trim()
+
+                            .mt-auto
+                                .d-flex.justify-content-between.align-items-center.mb-3(style="font-size: 0.75rem;")
+                                    div
+                                        span.text-warning.me-1 ★★★★★
+                                        span.fw-bold.text-white= movie.averageRating
+                                        span.text-secondary.ms-1 (1420)
+                                    div.text-secondary
+                                        i.fa.fa-user.me-1(style="color: #f5c518;")
+                                        span= movie.createdByUser || 'User'
+
+
+        #addMovieModal.modal.fade(tabindex="-1", aria-labelledby="addMovieModalLabel", aria-hidden="true")
+            .modal-dialog.modal-dialog-centered
+                .modal-content(style="background-color: #121620; border: 1px solid #1e2433; color: #ffffff; border-radius: 12px;")
+                    .modal-header(style="border-bottom: 1px solid #1e2433;")
+                        h5#addMovieModalLabel.modal-title.fw-bold.text-warning Add New Movie
+                        button.btn-close.btn-close-white(type="button", data-bs-dismiss="modal", aria-label="Close")
+                    form(action="/movies/add", method="post")
+                        .modal-body
+                            .mb-3
+                                label.form-label-custom Title
+                                input.form-control.custom-input(name="title", placeholder="Enter title", required)
+
+                            .row.g-2.mb-3
+                                .col-md-6
+                                    label.form-label-custom Director
+                                    input.form-control.custom-input(name="director", placeholder="Director name")
+                                .col-md-6
+                                    label.form-label-custom Release Year
+                                    input.form-control.custom-input(name="releaseYear", type="number", value="2026")
+
+                            .row.g-2.mb-3
+                                .col-md-6
+                                    label.form-label-custom Duration
+                                    input.form-control.custom-input(name="durationMinutes", type="number", placeholder="e.g. 148 min")
+                                .col-md-6
+                                    label.form-label-custom Initial Rating (1-5)
+                                    input.form-control.custom-input(name="rating", type="number", step="0.1", min="1", max="5", value="5.0")
+
+                            .mb-3
+                                label.form-label-custom Genre
+                                input.form-control.custom-input(name="genre", placeholder="Sci-Fi, Action")
+
+                            .mb-3
+                                label.form-label-custom Cover Image URL
+                                input.form-control.custom-input(name="logoUrl", placeholder="https://example.com/poster.jpg")
+
+                            .mb-3
+                                label.form-label-custom Short Description
+                                textarea.form-control.custom-input(name="description", rows="3", placeholder="Brief summary of the movie...", style="height: auto;")
+
+                        .modal-footer(style="border-top: 1px solid #1e2433;")
+                            button.btn.btn-outline-secondary(type="button", data-bs-dismiss="modal") Cancel
+                            button.btn.custom-btn-yellow(type="submit") Add Movie

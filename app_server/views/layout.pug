@@ -1,0 +1,111 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title= title
+    // Bootstrap 5.3 CSS
+    link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css')
+    // Font Awesome 4.7
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+
+    // Custom global styles
+    style.
+      html, body {
+        height: 100%;
+        background-color: #0b0d12 !important;
+        color: #ffffff;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      main.main-content {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .custom-header {
+        background-color: #212529 !important;
+
+      }
+      .custom-card {
+        background-color: #121620 !important;
+        border: 1px solid #1e2433 !important;
+        border-radius: 12px;
+        padding: 2.5rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      }
+      .custom-input {
+        background-color: #1a202c !important;
+        border: 1px solid #2d3748 !important;
+        color: #ffffff !important;
+        border-radius: 6px;
+        height: 44px;
+        font-size: 0.9rem;
+      }
+      .custom-input::placeholder {
+        color: #64748b !important;
+      }
+      .custom-input:focus {
+        background-color: #1a202c !important;
+        border-color: #f5c518 !important;
+        color: #ffffff !important;
+        box-shadow: none !important;
+      }
+      .custom-btn-yellow {
+        background-color: #f5c518 !important;
+        border: none !important;
+        color: #000000 !important;
+        font-weight: 600;
+        height: 44px;
+        border-radius: 6px;
+        font-size: 0.95rem;
+      }
+      .custom-btn-yellow:hover {
+        background-color: #e0b20f !important;
+      }
+      .form-label-custom {
+        font-size: 0.85rem;
+        color: #a0aec0;
+        margin-bottom: 0.4rem;
+        display: block;
+      }
+
+  body
+    unless hideHeader
+      header.p-3.custom-header
+        .container
+          .d-flex.flex-wrap.align-items-center.justify-content-center.justify-content-lg-start
+            a.d-flex.align-items-center.mb-2.mb-lg-0.text-white.text-decoration-none(href="/")
+              svg.bi.me-2(width="40", height="32", role="img", aria-label="Bootstrap")
+                //use(xlink:href="#bootstrap")
+
+            ul.nav.col-12.col-lg-auto.me-lg-auto.mb-2.justify-content-center.mb-md-0
+              li
+                a.nav-link.px-2.text-secondary(href="/") Home
+              li
+                //a.nav-link.px-2.text-white(href="/about") About
+
+            form.col-12.col-lg-auto.mb-3.mb-lg-0.me-lg-3
+              input.form-control.form-control-dark(type="search", placeholder="Search...", aria-label="Search")
+
+            .text-end
+              a.btn.btn-outline-light.me-2(href="/login") Login
+              a.btn.btn-warning(href="/register") Sign-up
+
+    block content
+
+    unless hideHeader
+      footer.mt-auto.py-3
+        .container.text-center
+          small.text-secondary &copy; Mykola Rubliuk 2026
+
+    // Bootstrap 5.3 JS Bundle
+    script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js')

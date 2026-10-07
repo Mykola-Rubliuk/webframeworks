@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    .d-flex.justify-content-center.align-items-center(style="min-height: 85vh; padding: 20px;")
+        div(style="width: 100%; max-width: 400px; padding: 20px;")
+            .custom-card
+                h2.text-center.fw-bold.mb-1(style="color: #f5c518; font-size: 1.8rem; letter-spacing: -0.5px;")= pageHeader.title
+                p.text-center.mb-4(style="color: #8c9ba5; font-size: 0.85rem;")= pageHeader.strapline
+
+                if error
+                    .alert.alert-danger.py-2.small.mb-3= error
+
+                form(action="/login", method="post")
+                    .mb-3
+                        label.form-label-custom Email
+                        input.form-control.custom-input(type="email", name="email", placeholder="you@example.com", required)
+
+                    .mb-4
+                        label.form-label-custom Password
+                        input.form-control.custom-input(type="password", name="password", placeholder="••••••••", required)
+
+                    button.btn.custom-btn-yellow.w-100(type="submit") Login
+
+                .text-center.mt-4
+                    a(href="/register", style="color: #718096; font-size: 0.8rem; text-decoration: underline;") Don't have an account? Register
