@@ -1,3 +1,4 @@
+require('./app_api/models/db');
 const express = require('express');
 const path = require('path');
 
