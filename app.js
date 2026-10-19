@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 
 const indexRouter = require('./app_server/routes/index');
+const apiRouter = require('./app_api/routes/index');
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/api', apiRouter);
 app.use('/', indexRouter);
 
 module.exports = app;
