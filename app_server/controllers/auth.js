@@ -5,7 +5,7 @@ const apiOptions = {
 };
 
 if (process.env.NODE_ENV === 'production') {
-  apiOptions.server = 'https://webframeworks.onrender.com';
+  apiOptions.server = 'https://webframeworks-ox1x.onrender.com';
 }
 
 /* GET 'Login' page */
