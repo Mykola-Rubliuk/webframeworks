@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const dbURI = "mongodb+srv://morrygithub_db_user:NMGCfZ4gNsHVdcv1@wf.332aaqh.mongodb.net/CineDex?retryWrites=true&w=majority";
+const dbURI = process.env.MONGODB_URI || "mongodb+srv://morrygithub_db_user:NMGCfZ4gNsHVdcv1@wf.332aaqh.mongodb.net/CineDex?retryWrites=true&w=majority";
+
 
 try {
     mongoose.connect(dbURI).then(
