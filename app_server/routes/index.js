@@ -12,6 +12,6 @@ router.post('/register', ctrlAuth.doRegister);
 
 router.get('/', ctrlMovies.movieList);
 router.get('/movies', ctrlMovies.movieList);
-router.post('/movies/add', ctrlMovies.addMovie);
+router.post('/movies/add', ctrlMovies.doAddMovie);
 
 module.exports = router;

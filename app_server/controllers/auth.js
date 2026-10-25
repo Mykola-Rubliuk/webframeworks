@@ -1,3 +1,13 @@
+const axios = require('axios');
+
+const apiOptions = {
+  server: 'http://localhost:3000'
+};
+
+if (process.env.NODE_ENV === 'production') {
+  apiOptions.server = 'https://webframeworks.onrender.com';
+}
+
 /* GET 'Login' page */
 const loginPage = function(req, res) {
   res.render('login', {
@@ -17,13 +27,41 @@ const registerPage = function(req, res) {
 };
 
 /* POST 'Login' action */
-const doLogin = function(req, res) {
-  res.redirect('/movies');
+const doLogin = async function(req, res) {
+  try {
+    await axios.post(`${apiOptions.server}/api/login`, req.body);
+    res.redirect('/movies');
+  } catch (err) {
+    const errorMsg = err.response && err.response.data && err.response.data.message
+        ? err.response.data.message
+        : 'Invalid email or password';
+
+    res.status(401).render('login', {
+      title: 'Login - CineDex',
+      hideHeader: true,
+      pageHeader: { title: 'CineDex', strapline: 'Log in to manage your collection' },
+      error: errorMsg
+    });
+  }
 };
 
 /* POST 'Register' action */
-const doRegister = function(req, res) {
-  res.redirect('/movies');
+const doRegister = async function(req, res) {
+  try {
+    await axios.post(`${apiOptions.server}/api/register`, req.body);
+    res.redirect('/movie');
+  } catch (err) {
+    const errorMsg = err.response && err.response.data && err.response.data.message
+        ? err.response.data.message
+        : 'Registration failed';
+
+    res.status(400).render('register', {
+      title: 'Register - CineDex',
+      hideHeader: true,
+      pageHeader: { title: 'CineDex', strapline: 'Create your personal cinematic library' },
+      error: errorMsg
+    });
+  }
 };
 
 module.exports = {
