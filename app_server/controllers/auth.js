@@ -49,7 +49,7 @@ const doLogin = async function(req, res) {
 const doRegister = async function(req, res) {
   try {
     await axios.post(`${apiOptions.server}/api/register`, req.body);
-    res.redirect('/movie');
+    res.redirect('/movies');
   } catch (err) {
     const errorMsg = err.response && err.response.data && err.response.data.message
         ? err.response.data.message
