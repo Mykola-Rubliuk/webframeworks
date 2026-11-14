@@ -1,0 +1,61 @@
+.movie-card {
+  background-color: #121620;
+  border: 1px solid #1e2433 !important;
+  border-radius: 12px;
+  overflow: hidden;
+  color: #ffffff;
+}
+
+.card-img-top {
+  height: 360px;
+  object-fit: cover;
+}
+
+.movie-card a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.movie-card a:hover {
+  color: #f5c518;
+}
+
+.director {
+  color: #718096;
+  font-size: 0.8rem;
+}
+
+.genre-badge {
+  background-color: #1a202c;
+  color: #a0aec0;
+  border: 1px solid #2d3748;
+  font-weight: normal;
+  font-size: 0.7rem;
+}
+
+.meta-row {
+  font-size: 0.75rem;
+}
+
+.user-icon {
+  color: #f5c518;
+}
+.stars {
+  position: relative;
+  display: inline-block;
+  color: #2d3748;
+  line-height: 1;
+}
+
+.stars::before {
+  content: '★★★★★';
+}
+
+.stars-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  color: #f5c518;
+}

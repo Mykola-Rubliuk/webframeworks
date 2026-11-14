@@ -1,22 +1,41 @@
-<div class="card">
-  <div class="card-block">
-    <h4>
-      <!-- Note the parentheses () for Signal invocation -->
-      <a href="/location/5a0ecd39c9ef585ea93cbc2b">{{ name() }}</a>
-      <small>&nbsp;
-        <i class="fa fa-star"></i>
-        <i class="fa fa-star"></i>
-        <i class="fa fa-star"></i>
-        <i class="fa fa-star"></i>
-        <i class="fa fa-star-o"></i>
-      </small>
-      <span class="badge badge-pill badge-default float-right">14.6km</span>
-    </h4>
-    <p class="address">125 High Street, Reading, RG6 1PS</p>
-    <div class="facilities">
-      <span class="badge badge-warning">Hot drinks</span>
-      <span class="badge badge-warning">Food</span>
-      <span class="badge badge-warning">Premium wifi</span>
+<div class="row g-4">
+  @for (movie of movies(); track movie._id) {
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+      <div class="card movie-card h-100 border-0">
+        <img class="card-img-top poster" [src]="movie.logoUrl" [alt]="movie.title">
+
+        <div class="card-body d-flex flex-column p-3">
+          <div class="title-row d-flex justify-content-between align-items-baseline gap-2 mb-1">
+            <h6 class="fw-bold mb-0 text-truncate">
+              <a href="/movies/{{ movie._id }}">{{ movie.title }}</a>
+            </h6>
+            <small class="text-secondary flex-shrink-0">{{ movie.releaseYear }}</small>
+          </div>
+
+          <p class="director text-truncate mb-2">
+            Dir: {{ movie.director }} &bull; {{ movie.durationMinutes | duration }}
+          </p>
+
+          <div class="genres mb-2">
+            @for (genre of movie.genre; track genre) {
+              <span class="badge genre-badge me-1">{{ genre }}</span>
+            }
+          </div>
+
+          <div class="meta-row mt-auto d-flex justify-content-between align-items-center gap-2">
+            <div class="rating flex-shrink-0">
+              <span class="stars me-1" [title]="movie.averageRating + ' / 5'">
+                <span class="stars-fill" [style.width.%]="(movie.averageRating ?? 0) / 5 * 100">★★★★★</span>
+              </span>
+              <span class="fw-bold text-white">{{ movie.averageRating }}</span>
+              <span class="text-secondary ms-1">(1420)</span>
+            </div>
+            <div class="author text-secondary text-truncate">
+              <i class="fa fa-user me-1 user-icon"></i>{{ movie.createdByUser || 'User' }}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  }
 </div>

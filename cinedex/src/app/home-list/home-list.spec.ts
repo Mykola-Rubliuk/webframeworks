@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HomeList } from './home-list';
+import {HomeList}from './home-list';
 
 describe('HomeList', () => {
   let component: HomeList;
