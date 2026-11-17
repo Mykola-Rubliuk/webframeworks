@@ -26,33 +26,7 @@ block content
 
         h3.fw-bold.mb-4(style="color: #ffffff;") Trending Catalog
 
-        .row.g-4
-            each movie in movies
-                .col-12.col-sm-6.col-md-4.col-lg-3
-                    .card.h-100.border-0(style="background-color: #121620 !important; border: 1px solid #1e2433 !important; border-radius: 12px; overflow: hidden;")
-                        img.card-img-top(src=movie.logoUrl, alt=movie.title, style="height: 360px; object-fit: cover;")
-
-                        .card-body.d-flex.flex-column.p-3
-                            .d-flex.justify-content-between.align-items-start.mb-1
-                                h6.fw-bold.text-white.mb-0= movie.title
-                                small.text-secondary= movie.releaseYear
-
-                            p.mb-2(style="color: #718096; font-size: 0.8rem;") Dir: #{movie.director}
-
-                            .mb-3
-                                if movie.genre
-                                    each g in (Array.isArray(movie.genre) ? movie.genre : movie.genre.split(','))
-                                        span.badge.me-1(style="background-color: #1a202c; color: #a0aec0; border: 1px solid #2d3748; font-weight: normal; font-size: 0.7rem;")= g.trim()
-
-                            .mt-auto
-                                .d-flex.justify-content-between.align-items-center.mb-3(style="font-size: 0.75rem;")
-                                    div
-                                        span.text-warning.me-1 ★★★★★
-                                        span.fw-bold.text-white= movie.averageRating
-                                        span.text-secondary.ms-1 (1420)
-                                    div.text-secondary
-                                        i.fa.fa-user.me-1(style="color: #f5c518;")
-                                        span= movie.createdByUser || 'User'
+        app-home-list Loading...
 
 
         #addMovieModal.modal.fade(tabindex="-1", aria-labelledby="addMovieModalLabel", aria-hidden="true")
@@ -98,3 +72,6 @@ block content
                         .modal-footer(style="border-top: 1px solid #1e2433;")
                             button.btn.btn-outline-secondary(type="button", data-bs-dismiss="modal") Cancel
                             button.btn.custom-btn-yellow(type="submit") Add Movie
+
+block scripts
+    script(type='module', src='/build/browser/main-O5FS2ZUA.js')

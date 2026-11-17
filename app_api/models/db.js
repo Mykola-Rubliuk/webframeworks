@@ -1,17 +1,15 @@
 const mongoose = require('mongoose');
 
-const dbURI = process.env.MONGODB_URI || "mongodb+srv://morrygithub_db_user:NMGCfZ4gNsHVdcv1@wf.332aaqh.mongodb.net/CineDex?retryWrites=true&w=majority";
+const dbURI = process.env.MONGODB_URI;
 
-
-try {
+if (!dbURI) {
+    console.error("MONGODB_URI is not set. Add it to .env (locally) or to the environment variables (on Render).");
+} else {
     mongoose.connect(dbURI).then(
         () => { console.log("Mongoose is connected to CineDex"); },
         err => { console.log("Mongoose connection error:", err); }
     );
-} catch (e) {
-    console.log("Could not connect to MongoDB");
 }
-
 
 require('./movies');
 require('./users');

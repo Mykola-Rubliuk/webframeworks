@@ -1,3 +1,4 @@
+require('dotenv').config();
 require('./app_api/models/db');
 var createError = require('http-errors');
 var express = require('express');
@@ -7,6 +8,7 @@ var logger = require('morgan');
 
 const indexRouter = require('./app_server/routes/index');
 const apiRouter = require('./app_api/routes/index');
+const cors = require('cors');
 
 var app = express();
 
@@ -19,6 +21,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'app_public')));
+
+app.use('/api', cors({
+  origin: ['http://localhost:4200', 'http://localhost:3000'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept']
+}));
 
 app.use('/api', apiRouter);
 app.use('/', indexRouter);
