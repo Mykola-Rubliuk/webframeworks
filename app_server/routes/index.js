@@ -1,4 +1,6 @@
 const express = require('express');
+const passport = require('passport');
+const Account = require('../../app_api/models/users');
 const router = express.Router();
 
 const ctrlAuth = require('../controllers/auth');
