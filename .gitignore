@@ -59,3 +59,6 @@ typings/
 
 # next.js build output
 .next
+
+sslcert/cert.pem
+sslcert/key.pem
