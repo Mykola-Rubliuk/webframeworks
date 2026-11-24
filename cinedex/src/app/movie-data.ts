@@ -7,8 +7,7 @@ import { Movie } from './models/movie';
 export class MovieData {
   private http = inject(HttpClient);
 
-  private apiBaseUrl =
-    window.location.hostname === 'localhost' ? 'http://localhost:3000/api' : '/api';
+  private apiBaseUrl = '/api';
 
   public async getMovies(): Promise<Movie[]> {
     const url = `${this.apiBaseUrl}/movies`;

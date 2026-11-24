@@ -5,8 +5,9 @@ const passport = require('passport');
 
 
 const apiOptions = {
-    server: 'http://localhost:3000'
+    server: process.env.API_URL || 'https://localhost:443'
 };
+
 
 if (process.env.NODE_ENV === 'production') {
     apiOptions.server = 'https://webframeworks-ox1x.onrender.com';
